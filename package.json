@@ -9,6 +9,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.12"
+    "@astrojs/db": "^0.14.13",
+    "@astrojs/node": "^9.2.1",
+    "@astrojs/vercel": "^8.1.4",
+    "@clerk/astro": "^2.7.2",
+    "@clerk/localizations": "^3.15.2",
+    "@egjs/flicking": "^4.12.0",
+    "@tailwindcss/vite": "^4.1.6",
+    "astro": "^5.7.12",
+    "tailwindcss": "^4.1.6"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@clerk/shared"
+    ]
   }
 }

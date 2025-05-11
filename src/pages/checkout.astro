@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+const { userId } = Astro.locals.auth();
+---
+
+<Layout title="Checkout - Store">
+    <h1 class="text-3xl font-bold">Checkout</h1>
+    <p class="mt-4">Aquí puedes realizar tu compra.</p>
+</Layout>

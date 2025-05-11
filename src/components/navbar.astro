@@ -1,0 +1,68 @@
+---
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
+import { navigation } from "@/consts";
+import Menu from "@/icons/menu.astro";
+---
+
+<header class="p-4 bg-black/20 backdrop-blur-md sticky top-0 z-50">
+  <nav class="container mx-auto flex justify-between h-12 items-center gap-2 lg:justify-end">
+    <ul class="hidden lg:block">
+      {
+        navigation.map((item) => (
+          <li class="inline-block">
+            <a href={item.href} class="text-white hover:bg-white/5 px-4 py-2 rounded transition-colors cursor-pointer">
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <details id="menu" class="lg:hidden relative">
+      <summary class="list-none flex items-center gap-2 cursor-pointer">
+        <Menu /> Menu
+      </summary>
+      <ul class="flex py-4 px-2 rounded flex-col gap-4 absolute mt-4">
+        {
+          navigation.map((item) => (
+            <li class="inline-block">
+              <a href={item.href} class="text-white w-full hover:bg-white/5 px-4 py-2 rounded transition-colors cursor-pointer">
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </details>
+
+    <SignedOut>
+      <SignInButton
+        class="px-4 shrink-0 py-2 rounded shadow hover:bg-white/5 active:bg-white/10 transition-colors cursor-pointer"
+        mode="modal"
+      >
+        Iniciar Sesión
+      </SignInButton>
+    </SignedOut>
+    <SignedIn>
+      <UserButton
+        showName
+        appearance={{
+          elements: {
+            userButtonBox: " px-3 py-2 text-white ",
+          },
+        }}
+        class:list={"px-4 py-2 rounded shadow"}
+      />
+    </SignedIn>
+  </nav>
+</header>
+
+<script>
+  const details = document.getElementById("menu");
+
+  document.addEventListener("click", (event) => {
+    if (!details?.contains(event.target as Node)) {
+      details?.removeAttribute("open");
+    }
+  });
+</script>

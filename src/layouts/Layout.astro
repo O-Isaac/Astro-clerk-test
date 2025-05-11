@@ -1,0 +1,45 @@
+---
+import Navbar from "@/components/navbar.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-black bg-gradient-to-t from-neutral-950 to-blue-950/30 min-h-dvh text-white">
+    <Navbar />
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import "tailwindcss";
+
+  .dropdown {
+    @apply relative inline-block;
+    position-area: var(--anchor-v, bottom) var(--anchor-h, span-right);
+
+    & > *:not(summary):focus {
+      @apply outline-hidden;
+    }
+    .dropdown-content {
+      @apply absolute bg-green-900/50 mt-2 backdrop-blur-2xl border border-green-900 text-white rounded-lg shadow-lg p-4;
+    }
+    &:not(details, .dropdown-open, .dropdown-hover:hover, :focus-within) {
+      .dropdown-content {
+        @apply hidden origin-top opacity-0;
+        scale: 95%;
+      }
+    }
+  }
+</style>

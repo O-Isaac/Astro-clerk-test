@@ -1,0 +1,42 @@
+---
+export interface Props {
+  id: string;
+  align?: "prev" | "center" | "next";
+  index?: number;
+}
+
+import "@egjs/flicking/dist/flicking.css";
+---
+
+<!-- Viewport element -->
+<div data-init="false" data-index={Astro.props.index} data-align={Astro.props.align || "center"} id="carousel" class="flicking-viewport">
+  <!-- Camera element -->
+  <div class="flicking-camera">
+    <!-- Panels, class names are your choice -->
+    <slot />
+  </div>
+</div>
+
+<script>
+  import Flicking from "@egjs/flicking";
+
+  const carouselReferences = document.querySelectorAll("#carousel[data-init='false']");
+
+  for (const carousel of carouselReferences) {
+    const align = carousel.getAttribute("data-align");
+    const defaultIndex = carousel.getAttribute("data-index");
+
+    if (align) {
+      const flicking = new Flicking(carousel as HTMLElement, {
+        align: align,
+        circular: true,
+        defaultIndex: defaultIndex ? parseInt(defaultIndex) : 0,
+        bound: true,
+        autoResize: true,
+        renderOnlyVisible: true,
+      });
+
+      carousel.setAttribute("data-init", "true");
+    }
+  }
+</script>

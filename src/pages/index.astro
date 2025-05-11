@@ -1,16 +1,94 @@
 ---
+import createOrUpdateUser from "@/utils/createOrUpdate";
+import Layout from "@/layouts/Layout.astro";
+import Carousel from "@/components/carousel.astro";
+import Logo from "@/icons/logo.astro";
+const { userId } = Astro.locals.auth();
 
+if (userId) {
+  const user = await createOrUpdateUser(userId, Astro.locals.currentUser);
+}
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home - Store">
+  <span class="size-32 bg-blue-500/10 absolute rounded-full blur-2xl"></span>
+  <span class="size-32 bg-blue-500/10 absolute rounded-full blur-2xl right-0 top-48"></span>
+
+  <header class="mx-auto container p-4">
+    <Logo class="my-24 block mx-auto invert max-w-fit svg-elem-1 svg-active w-full" />
+    <p class="text-4xl text-pretty leading-tight -mt-15 mb-15 text-center font-light">
+      Tu tienda de confianza para suplementos y ropa deportiva
+    </p>
+  </header>
+
+  <section class="relative w-full border-t border-blue-500/30 mt-10 overflow-hidden">
+    <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-blue-950/20 blur-[200px]"></div>
+
+    <div class="my-20">
+      <h2 class="text-6xl md:text-right font-bold p-12 leading-0">Suplementos</h2>
+      <p class="text-2xl md:text-right font-light px-12 pb-12 text-gray-200">Los ultimos suplementos alimenticios del suprabox!</p>
+
+      <Carousel align="center" id="suplementos">
+        <div class="panel">
+          <img
+            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+        </div>
+        <div class="panel">
+          <img
+            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+        </div>
+        <div class="panel">
+          <img
+            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+        </div>
+      </Carousel>
+    </div>
+  </section>
+
+  <section class="relative w-full border-t border-amber-500/30 overflow-hidden">
+    <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-amber-950/20 blur-[200px]"></div>
+
+    <div class="my-20">
+      <h2 class="text-6xl md:text-left font-bold p-12 leading-0">Ropa</h2>
+      <p class="text-2xl md:text-left font-light px-12 pb-12 text-gray-200">Los ultimos suplementos alimenticios del suprabox!</p>
+
+      <Carousel index={2} align="center" id="ropa">
+        <div class="panel">
+          <img
+            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+        </div>
+        <div class="panel">
+          <img
+            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+        </div>
+        <div class="panel">
+          <img
+            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+        </div>
+      </Carousel>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .panel {
+    width: 400px;
+    height: 600px;
+    margin-inline: 0.645rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    pointer-events: none;
+  }
+</style>
