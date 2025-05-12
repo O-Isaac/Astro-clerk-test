@@ -1,7 +1,7 @@
 ---
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
 import { navigation } from "@/consts";
-import Menu from "@/icons/menu.astro";
+import Checkout from "./react/checkout";
 ---
 
 <header class="p-4 bg-black/20 backdrop-blur-md sticky top-0 z-50">
@@ -17,23 +17,6 @@ import Menu from "@/icons/menu.astro";
         ))
       }
     </ul>
-
-    <details id="menu" class="lg:hidden relative">
-      <summary class="list-none flex items-center gap-2 cursor-pointer">
-        <Menu /> Menu
-      </summary>
-      <ul class="flex py-4 px-2 rounded flex-col gap-4 absolute mt-4">
-        {
-          navigation.map((item) => (
-            <li class="inline-block">
-              <a href={item.href} class="text-white w-full hover:bg-white/5 px-4 py-2 rounded transition-colors cursor-pointer">
-                {item.name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </details>
 
     <SignedOut>
       <SignInButton
@@ -53,6 +36,8 @@ import Menu from "@/icons/menu.astro";
         }}
         class:list={"px-4 py-2 rounded shadow"}
       />
+
+      <Checkout client:load> Hola </Checkout>
     </SignedIn>
   </nav>
 </header>

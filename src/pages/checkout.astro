@@ -1,10 +1,18 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import createOrUpdateUser from "@/utils/createOrUpdate";
+
+import Layout from "../layouts/Layout.astro";
+import CheckoutForm from "@/components/react/checkout-form";
 
 const { userId } = Astro.locals.auth();
+
+let user;
+
+if (userId) {
+  user = await createOrUpdateUser(userId, Astro.locals.currentUser);
+}
 ---
 
 <Layout title="Checkout - Store">
-    <h1 class="text-3xl font-bold">Checkout</h1>
-    <p class="mt-4">Aquí puedes realizar tu compra.</p>
+  <CheckoutForm client:load />
 </Layout>

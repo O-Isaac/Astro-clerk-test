@@ -3,6 +3,7 @@ import createOrUpdateUser from "@/utils/createOrUpdate";
 import Layout from "@/layouts/Layout.astro";
 import Carousel from "@/components/carousel.astro";
 import Logo from "@/icons/logo.astro";
+import AddToCart from "@/components/react/addItem";
 const { userId } = Astro.locals.auth();
 
 if (userId) {
@@ -20,6 +21,7 @@ if (userId) {
       Tu tienda de confianza para suplementos y ropa deportiva
     </p>
   </header>
+  <AddToCart client:load />
 
   <section class="relative w-full border-t border-blue-500/30 mt-10 overflow-hidden">
     <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-blue-950/20 blur-[200px]"></div>
