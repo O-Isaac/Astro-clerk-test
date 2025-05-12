@@ -1,10 +1,16 @@
+import { useId, useState } from "react";
+
 import { useCart } from "@/hooks/useCart";
+import { useIsClient } from "@/hooks/useIsClient";
 import StripeIcon from "@/icons/react/stripe";
 import type { CartItem } from "@/store";
 
 const CheckoutForm: React.FC = () => {
   const { cartItems, subtotal, updateQuantity, removeItemFromCart } = useCart();
   const items = Object.values(cartItems);
+  const isClient = useIsClient();
+
+  if (!isClient) return null;
 
   return (
     <section className="relative w-full min-h-dvh border-t border-green-500/30 overflow-hidden">
@@ -35,16 +41,19 @@ interface CartItemsProps {
   subtotal: number;
 }
 
-const CartItemsList: React.FC<CartItemsProps> = ({ items, updateQuantity, removeItemFromCart, subtotal }) => (
-  <div className="grid gap-8 max-w-4xl mx-auto">
-    {items.map((item) => (
-      <CartItem key={item.id} item={item} updateQuantity={updateQuantity} removeItemFromCart={removeItemFromCart} />
-    ))}
-    <TotalAmount subtotal={subtotal} />
-    <ProceedToPaymentButton />
-  </div>
-);
+const CartItemsList: React.FC<CartItemsProps> = ({ items, updateQuantity, removeItemFromCart, subtotal }) => {
+  const id = useId();
 
+  return (
+    <div className="grid gap-8 max-w-4xl mx-auto">
+      {items.map((item) => (
+        <CartItem key={item.id + id} item={item} updateQuantity={updateQuantity} removeItemFromCart={removeItemFromCart} />
+      ))}
+      <TotalAmount subtotal={subtotal} />
+      <ProceedToPaymentButton />
+    </div>
+  );
+};
 interface CartItemProps {
   item: CartItem;
   updateQuantity: (id: string, delta: number) => void;
@@ -80,12 +89,36 @@ const TotalAmount = ({ subtotal }: { subtotal: number }) => (
   <div className="text-right text-3xl font-bold text-white mt-4">Total: ${subtotal.toFixed(2)}</div>
 );
 
-const ProceedToPaymentButton = () => (
-  <button className="flex items-center justify-center gap-2 w-full mt-8 bg-stripe-blue-600 text-white text-xl font-semibold py-4 rounded-xl transition-all duration-300 cursor-pointer relative overflow-hidden bg-indigo-800 hover:bg-indigo-900">
-    <StripeIcon />
-    Proceder al Pago
-  </button>
-);
+const ProceedToPaymentButton = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/create/checkout");
+
+      if (response.ok) {
+        const { url } = await response.json();
+        window.location.href = url;
+      }
+    } catch (error) {
+      console.error("Error al iniciar el checkout:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      disabled={loading}
+      onClick={handleCheckout}
+      className="flex items-center justify-center gap-2 w-full mt-8 bg-stripe-blue-600 text-white text-xl font-semibold py-4 rounded-xl transition-all duration-300 cursor-pointer relative overflow-hidden bg-indigo-800 hover:bg-indigo-900 disabled:bg-indigo-900"
+    >
+      <StripeIcon />
+      Proceder al Pago
+    </button>
+  );
+};
 
 const StripeNotice = () => (
   <p className="text-center text-gray-400 text-lg mt-4">

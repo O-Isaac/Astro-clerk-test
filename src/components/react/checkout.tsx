@@ -3,6 +3,8 @@
 import { Drawer } from "vaul";
 import { useCart } from "@/hooks/useCart";
 import CartIcon from "@/icons/react/cart";
+import { useIsClient } from "@/hooks/useIsClient";
+import { useId } from "react";
 
 interface CartItemProps {
   image: string;
@@ -63,7 +65,11 @@ const CartItem: React.FC<CartItemProps> = ({ image, title, price, color, quantit
 };
 
 const Checkout: React.FC = () => {
-  const { cartItems, subtotal, setCartOpen } = useCart();
+  const { cartItems, subtotal } = useCart();
+  const isClient = useIsClient();
+  const id = useId();
+
+  if (!isClient) return null;
 
   const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
@@ -96,7 +102,7 @@ const Checkout: React.FC = () => {
                   {Object.values(cartItems).map((item) => (
                     <CartItem
                       id={item.id}
-                      key={item.id}
+                      key={item.id + id}
                       image={item.imageSrc}
                       title={item.name}
                       price={item.price}
