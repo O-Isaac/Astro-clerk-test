@@ -1,47 +1,120 @@
-# Astro Starter Kit: Minimal
+# SupraBox - Plataforma E-commerce
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+![Arquitectura de la Tienda](https://i.imgur.com/rLErKu0.png)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## 📦 Descripción
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+SupraBox es una plataforma de comercio electrónico moderna construida con Astro, React y Turso. Integra Stripe para pagos seguros y Clerk para la autenticación de usuarios.
 
-## 🚀 Project Structure
+## ✨ Características
 
-Inside of your Astro project, you'll see the following folders and files:
+- 🛍️ Carrito de compras dinámico
+- 💳 Pagos seguros a través de Stripe
+- 🔐 Autenticación de usuarios con Clerk
+- 🎨 Interfaz moderna con Tailwind CSS
+- 📱 Diseño responsive
+- 🔄 Actualizaciones en tiempo real
+- 🛒 Gestión de productos
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Frontend**:
+
+  - Astro
+  - React
+  - Tailwind CSS
+  - Vaul (para componentes drawer)
+  - Nanostores (gestión de estado)
+
+- **Backend**:
+  - Turso
+  - API de Stripe
+  - Autenticación con Clerk
+
+## 📁 Estructura del Proyecto
 
 ```text
 /
-├── public/
+├── public/            # Archivos estáticos
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/    # Componentes UI
+│   ├── hooks/        # Hooks personalizados
+│   ├── icons/        # Iconos SVG
+│   ├── layouts/      # Layouts de páginas
+│   ├── pages/        # Rutas y páginas
+│   └── utils/        # Funciones auxiliares
+└── astro.config.mjs  # Configuración de Astro
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🔄 Flujo de Trabajo
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Carrito de Compras
 
-Any static assets, like images, can be placed in the `public/` directory.
+1. Usuarios navegan productos
+2. Agregan items al carrito
+3. Actualizaciones en tiempo real
+4. Gestión de cantidades
+5. Eliminación de productos
 
-## 🧞 Commands
+### Proceso de Compra
 
-All commands are run from the root of the project, from a terminal:
+1. Revisión del carrito
+2. Proceder al pago
+3. Ingreso de datos de envío
+4. Pago mediante Stripe
+5. Confirmación del pedido
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+### Autenticación
 
-## 👀 Want to learn more?
+- Inicio de sesión/registro con Clerk
+- Rutas protegidas
+- Gestión de perfil
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🚀 Inicio Rápido
+
+1. Clonar el repositorio
+
+```bash
+git clone [url-repositorio]
+```
+
+2. Instalar dependencias
+
+```bash
+pnpm install
+```
+
+3. Configurar variables de entorno
+
+```env
+PUBLIC_CLERK_PUBLISHABLE_KEY=<Token>
+CLERK_SECRET_KEY=<token>
+ASTRO_DB_REMOTE_URL=<url>
+ASTRO_DB_APP_TOKEN<token>
+PUBLIC_STRIPE_SECRET_KEY=<token>
+STRIPE_PUBLIC_KEY=<token>
+```
+
+## 🧞 Comandos
+
+| Comando        | Acción                                    |
+| :------------- | :---------------------------------------- |
+| `pnpm install` | Instala dependencias                      |
+| `pnpm dev`     | Inicia servidor local en `localhost:4321` |
+| `pnpm build`   | Construye el sitio para producción        |
+| `pnpm preview` | Vista previa local de la construcción     |
+
+## 🤝 Contribuir
+
+¡Las contribuciones son bienvenidas! No dudes en enviar un Pull Request.
+
+## 📝 Licencia
+
+MIT
+
+## 🔗 Enlaces Útiles
+
+- [Documentación de Astro](https://docs.astro.build)
+- [Documentación de Stripe](https://stripe.com/docs)
+- [Documentación de Turso](https://docs.turso.tech/introduction)
+- [Documentación de Clerk](https://clerk.com/docs)
