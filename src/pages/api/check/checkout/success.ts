@@ -1,5 +1,3 @@
-// src/pages/api/create-checkout-session.ts
-
 import { stripe } from "@/utils/stripe";
 import type { APIRoute } from "astro";
 

@@ -1,14 +1,12 @@
 ---
-import createOrUpdateUser from "@/utils/createOrUpdate";
 import Layout from "@/layouts/Layout.astro";
 import Carousel from "@/components/carousel.astro";
 import Logo from "@/icons/logo.astro";
-import AddToCart from "@/components/react/addItem";
-const { userId } = Astro.locals.auth();
+import { db, Productos } from "astro:db";
+import { eq } from "astro:db";
 
-if (userId) {
-  const user = await createOrUpdateUser(userId, Astro.locals.currentUser);
-}
+const preenterno = await db.select().from(Productos).where(eq(Productos.categoria, "cat_preentreno"));
+const suplementos = await db.select().from(Productos).where(eq(Productos.categoria, "cat_aminoacidos"));
 ---
 
 <Layout title="Home - Store">
@@ -21,7 +19,6 @@ if (userId) {
       Tu tienda de confianza para suplementos y ropa deportiva
     </p>
   </header>
-  <AddToCart client:load />
 
   <section class="relative w-full border-t border-blue-500/30 mt-10 overflow-hidden">
     <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-blue-950/20 blur-[200px]"></div>
@@ -30,25 +27,14 @@ if (userId) {
       <h2 class="text-6xl md:text-right font-bold p-12 leading-0">Suplementos</h2>
       <p class="text-2xl md:text-right font-light px-12 pb-12 text-gray-200">Los ultimos suplementos alimenticios del suprabox!</p>
 
-      <Carousel align="center" id="suplementos">
-        <div class="panel">
-          <img
-            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-        </div>
-        <div class="panel">
-          <img
-            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-        </div>
-        <div class="panel">
-          <img
-            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-        </div>
+      <Carousel index={preenterno.length - 3} align="center" id="suplementos">
+        {
+          preenterno.map((item) => (
+            <div class="panel">
+              <img src={item.imagen} alt={item.nombre} />
+            </div>
+          ))
+        }
       </Carousel>
     </div>
   </section>
@@ -57,28 +43,17 @@ if (userId) {
     <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-amber-950/20 blur-[200px]"></div>
 
     <div class="my-20">
-      <h2 class="text-6xl md:text-left font-bold p-12 leading-0">Ropa</h2>
-      <p class="text-2xl md:text-left font-light px-12 pb-12 text-gray-200">Los ultimos suplementos alimenticios del suprabox!</p>
+      <h2 class="text-6xl md:text-left font-bold p-12 leading-0">Pre-entreno</h2>
+      <p class="text-2xl md:text-left font-light px-12 pb-12 text-gray-200">Mejora tu potencia fisica con lo mejor!</p>
 
       <Carousel index={2} align="center" id="ropa">
-        <div class="panel">
-          <img
-            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-        </div>
-        <div class="panel">
-          <img
-            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-        </div>
-        <div class="panel">
-          <img
-            src="https://images.unsplash.com/photo-1701859082181-663004d346d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-        </div>
+        {
+          suplementos.map((item) => (
+            <div class="panel">
+              <img src={item.imagen} alt={item.nombre} />
+            </div>
+          ))
+        }
       </Carousel>
     </div>
   </section>
