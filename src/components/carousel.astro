@@ -3,13 +3,17 @@ export interface Props {
   id: string;
   align?: "prev" | "center" | "next";
   index?: number;
+  perspective?: boolean;
 }
 
 import "@egjs/flicking/dist/flicking.css";
+import "@egjs/flicking-plugins/dist/flicking-plugins.css";
+
+
 ---
 
 <!-- Viewport element -->
-<div data-init="false" data-index={Astro.props.index} data-align={Astro.props.align || "center"} id="carousel" class="flicking-viewport">
+<div data-init="false" data-perspective={Astro.props.perspective} data-index={Astro.props.index} data-align={Astro.props.align || "center"} id="carousel" class="flicking-viewport">
   <!-- Camera element -->
   <div class="flicking-camera">
     <!-- Panels, class names are your choice -->
@@ -19,12 +23,14 @@ import "@egjs/flicking/dist/flicking.css";
 
 <script>
   import Flicking from "@egjs/flicking";
+  import { Perspective } from "@egjs/flicking-plugins";
 
   const carouselReferences = document.querySelectorAll("#carousel[data-init='false']");
 
   for (const carousel of carouselReferences) {
     const align = carousel.getAttribute("data-align");
     const defaultIndex = carousel.getAttribute("data-index");
+    const perspective = carousel.getAttribute("data-perspective");
 
     if (align) {
       const flicking = new Flicking(carousel as HTMLElement, {
@@ -36,7 +42,14 @@ import "@egjs/flicking/dist/flicking.css";
         renderOnlyVisible: true,
       });
 
+      if (perspective) {
+        flicking.addPlugins(new Perspective({
+          rotate: 0.1
+        }));
+      }
+      
       carousel.setAttribute("data-init", "true");
+      
     }
   }
 </script>

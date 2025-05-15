@@ -1,10 +1,10 @@
 "use client";
 
 import { Drawer } from "vaul";
-import { useCart } from "@/hooks/useCart";
 import CartIcon from "@/icons/react/cart";
-import { useIsClient } from "@/hooks/useIsClient";
-import { useId } from "react";
+import { useEffect, useId } from "react";
+import { useStore } from "@nanostores/react";
+import { decreaseQuantity, deleteFromCart, getSubtotal, getTotalItems, increaseQuantity, shoppingCart } from "@/store";
 
 interface CartItemProps {
   image: string;
@@ -12,12 +12,10 @@ interface CartItemProps {
   price: number;
   color: string;
   quantity: number;
-  id: string;
+  id: number;
 }
 
 const CartItem: React.FC<CartItemProps> = ({ image, title, price, color, quantity, id }) => {
-  const { updateQuantity, removeItemFromCart } = useCart();
-
   return (
     <li className="flex py-6">
       <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -37,7 +35,7 @@ const CartItem: React.FC<CartItemProps> = ({ image, title, price, color, quantit
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => updateQuantity(id, -1)}
+              onClick={() => decreaseQuantity(id, 1)}
               className="px-2 py-1 bg-blue-500 rounded hover:bg-blue-600 cursor-pointer"
             >
               −
@@ -45,7 +43,7 @@ const CartItem: React.FC<CartItemProps> = ({ image, title, price, color, quantit
             <span className="text-gray-900">{quantity}</span>
             <button
               type="button"
-              onClick={() => updateQuantity(id, 1)}
+              onClick={() => increaseQuantity(id, 1)}
               className="px-2 py-1 bg-blue-500 rounded hover:bg-blue-600 cursor-pointer"
             >
               +
@@ -53,7 +51,7 @@ const CartItem: React.FC<CartItemProps> = ({ image, title, price, color, quantit
           </div>
           <button
             type="button"
-            onClick={() => removeItemFromCart(id)}
+            onClick={() => deleteFromCart(id)}
             className="font-medium cursor-pointer text-indigo-600 hover:text-indigo-500"
           >
             Quitar
@@ -64,26 +62,26 @@ const CartItem: React.FC<CartItemProps> = ({ image, title, price, color, quantit
   );
 };
 
-const Checkout: React.FC = () => {
-  const { cartItems, subtotal } = useCart();
-  const isClient = useIsClient();
+const Cart: React.FC = () => {
   const id = useId();
-
-  if (!isClient) return null;
-
-  const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+  const cartItems = useStore(shoppingCart);
+  const itemCount = getTotalItems(cartItems);
+  const subtotal = getSubtotal(cartItems);
 
   return (
     <Drawer.Root defaultOpen={false} direction="right">
       <Drawer.Trigger className="hover:opacity-90 hover:cursor-pointer p-2 ">
         <div className="flex items-center justify-center relative">
           <CartIcon />
-          {totalQuantity > 0 && <span className="text-xs font-bold text-white bg-red-500 rounded-full px-2 py-1">{totalQuantity}</span>}
+          <span className="text-xs font-bold text-white bg-red-500 rounded-full px-2 py-1">{itemCount ?? 0}</span>
         </div>
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="bg-white flex flex-col rounded-l-[10px] mt-24 min-h-dvh fixed bottom-0 right-0 outline-none z-50 w-full max-w-md shadow-xl">
+        <Drawer.Content
+          aria-describedby="div"
+          className="bg-white flex flex-col rounded-l-[10px] mt-24 min-h-dvh fixed bottom-0 right-0 outline-none z-50 w-full max-w-md shadow-xl"
+        >
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
               <Drawer.Title className="text-lg font-medium text-gray-900">Carrito de compras</Drawer.Title>
@@ -146,4 +144,4 @@ const Checkout: React.FC = () => {
   );
 };
 
-export default Checkout;
+export default Cart;

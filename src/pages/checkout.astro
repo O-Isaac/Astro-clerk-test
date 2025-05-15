@@ -1,18 +1,21 @@
 ---
-import createOrUpdateUser from "@/utils/createOrUpdate";
-
 import Layout from "../layouts/Layout.astro";
-import CheckoutForm from "@/components/react/checkout-form";
-
-const { userId } = Astro.locals.auth();
-
-let user;
-
-if (userId) {
-  user = await createOrUpdateUser(userId, Astro.locals.currentUser);
-}
+import ListProducts from "@/components/react/checkout/list-products";
 ---
 
 <Layout title="Checkout - Store">
-  <CheckoutForm client:load />
+  <section class="relative w-full min-h-dvh border-t border-green-500/30 overflow-hidden flex flex-col gap-4">
+    <span class="absolute left-1/2 -translate-x-1/2 w-full aspect-square rounded-full bg-green-900/20 blur-[200px] -z-10"></span>
+
+    <header class="py-20">
+      <h2 class="text-6xl font-bold text-center mb-8">Resumen del Pedido</h2>
+      <p class="text-center text-gray-400 text-lg mt-4">
+        Todos los datos de envío y facturación serán procesados de manera segura a través de Stripe.
+      </p>
+    </header>
+
+    <div class="border-t h-full border-neutral-500/10 bg-neutral-950 flex-1 overflow-auto rounded-t-3xl p-4">
+      <ListProducts client:only="react" />
+    </div>
+  </section>
 </Layout>

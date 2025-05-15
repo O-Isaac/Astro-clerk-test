@@ -1,6 +1,5 @@
 import { useId, useState } from "react";
 
-import { useCart } from "@/hooks/useCart";
 import { useIsClient } from "@/hooks/useIsClient";
 import StripeIcon from "@/icons/react/stripe";
 import type { CartItem } from "@/store";

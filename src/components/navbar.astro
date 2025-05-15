@@ -1,8 +1,9 @@
 ---
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
 import { navigation } from "@/consts";
-import Checkout from "./react/checkout";
-import NavbarDropdown from "./react/navbar-dropdown";
+import NavbarDropdown from "@/components/react/navbar-dropdown";
+import Cart from "@/components/react/cart";
+
 ---
 
 <header class="p-4 bg-black/20 backdrop-blur-md sticky top-0 z-50 flex items-center">
@@ -43,19 +44,9 @@ import NavbarDropdown from "./react/navbar-dropdown";
           class:list={"px-4 py-2 rounded shadow"}
         />
 
-        <Checkout client:load />
+        <Cart client:only="react" />
         <NavbarDropdown className="hover:opacity-90 cursor-pointer block lg:hidden" client:load />
       </div>
     </SignedIn>
   </nav>
 </header>
-
-<script>
-  const details = document.getElementById("menu");
-
-  document.addEventListener("click", (event) => {
-    if (!details?.contains(event.target as Node)) {
-      details?.removeAttribute("open");
-    }
-  });
-</script>
