@@ -62,6 +62,9 @@ const CartItem: React.FC<CartItemProps> = ({ image, title, price, color, quantit
   );
 };
 
+
+
+
 const Cart: React.FC = () => {
   const id = useId();
   const cartItems = useStore(shoppingCart);
@@ -80,7 +83,7 @@ const Cart: React.FC = () => {
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
         <Drawer.Content
           aria-describedby="div"
-          className="bg-white flex flex-col rounded-l-[10px] mt-24 min-h-dvh fixed bottom-0 right-0 outline-none z-50 w-full max-w-md shadow-xl"
+          className="bg-white flex flex-col h-screen rounded-l-[10px] fixed bottom-0 right-0 outline-none z-50 w-full max-w-md shadow-xl"
         >
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">

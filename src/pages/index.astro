@@ -4,10 +4,12 @@ import Carousel from "@/components/carousel.astro";
 import Logo from "@/icons/logo.astro";
 import { db, Productos } from "astro:db";
 import { eq } from "astro:db";
-import AddToCart from "@/components/react/addItem";
+import { clearCart } from "@/store";
 
 const preenterno = await db.select().from(Productos).where(eq(Productos.categoria, "cat_preentreno"));
 const suplementos = await db.select().from(Productos).where(eq(Productos.categoria, "cat_aminoacidos"));
+
+clearCart()
 ---
 
 <Layout title="Home - Store">

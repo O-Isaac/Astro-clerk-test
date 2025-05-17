@@ -1,0 +1,87 @@
+---
+import Card from "@/components/checkout/card.astro";
+import Data from "@/components/checkout/data.astro";
+import Lines from "@/components/checkout/lines.astro";
+
+import Layout from "@/layouts/Layout.astro";
+import { getUsername, getProductosConCantidad } from "@/utils/database";
+import { getSessionData, formatShipping } from "@/utils/stripe";
+import { generateOrderId } from "@/utils/security";
+import { createOrderIfNotExists } from "@/utils/create";
+import { clearCart, shoppingCart } from "@/store";
+
+const { id } = Astro.params;
+const { userId } = Astro.locals.auth();
+
+const sessionData = await getSessionData(id as string, userId as string, Astro.redirect);
+
+if (sessionData instanceof Response) {
+  return sessionData;
+}
+
+const { session } = sessionData;
+const { metadata } = session;
+
+if (!metadata) {
+  return Astro.redirect("/");
+}
+
+const userData = await getUsername(metadata.userId as string);
+const productsMetadata: Array<[number, number]> = JSON.parse(metadata.products as string);
+const products = await getProductosConCantidad(productsMetadata);
+
+const orderId = generateOrderId(session.id, session.created)
+
+await createOrderIfNotExists(orderId, session.payment_status, {
+  userId: userId!,
+  direccion: formatShipping(session.collected_information?.shipping_details),
+  checkoutId: session.id,
+  products: productsMetadata,
+  total: products.reduce((total, producto) => total + producto.precio * producto.cantidad, 0),
+}, clearCart)
+
+
+---
+
+<Layout title="Checkout - Store">
+    <section class="relative w-full min-h-dvh border-t border-teal-500/30">
+        <!-- Fondo difuso detrás, encapsulado en un contenedor que solo afecta el fondo -->
+        <span class="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
+          <span class="absolute left-1/2 -translate-x-1/2 w-full aspect-square rounded-full bg-teal-900/20 blur-[200px]"></span>
+        </span>
+      
+        <!-- Contenido principal -->
+        <div class="relative z-10 flex flex-col gap-4">
+          <header class="py-20">
+            <h2 class="text-6xl font-bold text-center mb-8">Pedido Realizado</h2>
+            <p class="text-center text-gray-400 text-lg mt-4">Gracias por tu pedido. Te contactaremos pronto.</p>
+            <p class="text-center text-xl text-white mt-2"> <strong>{orderId}</strong></p>
+          </header>
+      
+          <main class="container mx-auto grid gap-8 lg:grid-cols-2 pb-16">
+            <!-- Columna izquierda: productos -->
+            <Lines>
+              <!-- Tu componente Card, copiado varias veces como ejemplo -->
+               {products.map((producto) => (
+                <Card
+                  image={producto.imagen}
+                  nombre={producto.nombre}
+                  total={producto.precio * producto.cantidad}
+                  cantidad={producto.cantidad}
+                />
+               ))}
+            </Lines>
+      
+            <!-- Columna derecha: detalles del pedido con sticky -->
+            <Data
+              nombre={userData?.nombre!}
+              correo={userData?.email!}
+              direccion={formatShipping(session.collected_information?.shipping_details)}
+              subtotal={products.reduce((total, producto) => total + producto.precio * producto.cantidad, 0)}
+              estado={session.payment_status}
+              id={id!}
+            />
+          </main>
+        </div>
+      </section>
+      </Layout>

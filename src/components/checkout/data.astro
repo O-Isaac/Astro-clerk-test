@@ -1,0 +1,52 @@
+---
+import DownloadInvoice from '../react/checkout/download-invoice';
+
+export interface Props {
+    nombre: string;
+    correo: string;
+    direccion: string;
+    subtotal: number;
+    estado: string;
+    id: string;
+}
+
+const { nombre, correo, direccion, subtotal, estado, id } = Astro.props;
+---
+
+<div class="lg:sticky lg:top-24 self-start space-y-6">
+  <h3 class="text-2xl font-semibold text-white">Datos del Pedido</h3>
+
+  <div class="flex flex-col gap-4">
+    <!-- Badge line -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-2">
+      <span class="text-sm text-gray-400">Nombre</span>
+      <span class="inline-block bg-white/10 text-white px-3 py-1 rounded-full text-sm font-medium">{nombre}</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-2">
+      <span class="text-sm text-gray-400">Correo</span>
+      <span class="inline-block bg-white/10 text-white px-3 py-1 rounded-full text-sm font-medium">{correo}</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-2">
+      <span class="text-sm text-gray-400">Dirección</span>
+      <span class="inline-block bg-white/10 text-white px-3 py-1 rounded-full text-sm font-medium">{direccion}</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-2">
+      <span class="text-sm text-gray-400">Subtotal</span>
+      <span class="inline-block bg-white/10 text-white px-3 py-1 rounded-full text-sm font-medium">{subtotal.toFixed(2)}€</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+      <span class="text-sm text-gray-400">Estado</span>
+      <span class="inline-block px-3 py-1 rounded-full text-sm font-medium bg-yellow-500/20 text-yellow-300">
+        {estado}
+      </span>
+    </div>
+  </div>
+
+  <div class="pt-4">
+    <DownloadInvoice client:only="react" id={id} />
+  </div>
+</div>

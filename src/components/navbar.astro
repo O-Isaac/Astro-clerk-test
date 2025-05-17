@@ -35,6 +35,7 @@ import Cart from "@/components/react/cart";
     <SignedIn>
       <div class="flex items-center gap-2">
         <UserButton
+
           showName
           appearance={{
             elements: {
@@ -42,10 +43,17 @@ import Cart from "@/components/react/cart";
             },
           }}
           class:list={"px-4 py-2 rounded shadow"}
-        />
+        >
+        <UserButton.MenuItems>
+          <UserButton.Link label="Mis pedidos" href="/checkout/estado">
+              <div class="" slot="label-icon">
+                📦
+              </div>
+          </UserButton.Link>
+        </UserButton>
 
         <Cart client:only="react" />
-        <NavbarDropdown className="hover:opacity-90 cursor-pointer block lg:hidden" client:load />
+        <NavbarDropdown className="hover:opacity-90 cursor-pointer block lg:hidden" client:only="react" />
       </div>
     </SignedIn>
   </nav>

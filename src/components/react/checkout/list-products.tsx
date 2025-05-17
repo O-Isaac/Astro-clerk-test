@@ -20,13 +20,14 @@ export const ListProducts = () => {
 
     try {
       const body = Object.fromEntries(cart.map((product) => [product.id, product.quantity]));
-      const request = await fetch("/api/create/checkout", {
+      const response = await fetch("/api/create/checkout", {
         method: "POST",
         body: JSON.stringify(body),
+        redirect: "follow",
       });
 
-      if (request.ok) {
-        const { url } = await request.json();
+      if (response.ok) {
+        const { url } = await response.json();
         window.location.href = url;
       }
     } catch (err) {

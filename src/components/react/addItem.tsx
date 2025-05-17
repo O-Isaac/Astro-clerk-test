@@ -1,4 +1,5 @@
 import { addToCart } from "@/store";
+import { toast } from "sonner"
 
 
 interface AddToCartProps {
@@ -13,6 +14,7 @@ interface AddToCartProps {
 
 const AddToCart: React.FC<AddToCartProps> = ({ id, imageSrc, name, price, quantity, className }) => {
   const handlerAddToCart = () => {
+    toast.success(`${name} agregado al carrito`)
     addToCart({ id, imageSrc, name, price, quantity });
   }
 

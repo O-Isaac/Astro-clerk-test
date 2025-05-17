@@ -1,0 +1,35 @@
+---
+export interface Props {
+    image: string,
+    nombre: string,
+    total: number
+    cantidad: number
+}
+
+
+const {image, nombre, total, cantidad} = Astro.props;
+---
+
+<div class="relative rounded-xl overflow-hidden shadow-lg flex items-center gap-6 bg-transparent cursor-pointer group">
+    <!-- Fondo desenfocado -->
+    <img
+      src={image}
+      alt={nombre}
+      class="absolute inset-0 w-full h-full object-cover filter blur-3xl opacity-20 scale-110 transition-transform group-hover:scale-105"
+      aria-hidden="true"
+    />
+
+    <!-- Imagen frontal -->
+    <img
+      src={image}
+      alt={nombre}
+      class="relative w-32 h-32 object-contain rounded"
+    />
+
+    <!-- Texto con datos -->
+    <div class="relative text-white flex flex-col justify-center space-y-1 min-w-[180px]">
+      <h4 class="font-semibold text-lg truncate">{nombre}</h4>
+      <p>Cantidad: <span class="font-medium">{cantidad}</span></p>
+      <p>Total: <span class="font-semibold">{total.toFixed(2)}€</span></p>
+    </div>
+</div>
