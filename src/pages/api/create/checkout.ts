@@ -1,6 +1,6 @@
 // src/pages/api/create-checkout-session.ts
 
-import { getMultipleProductsByIds, getProductosConCantidad } from "@/utils/database";
+import { getProductosConCantidad } from "@/utils/database";
 import { createLineItem, createSession } from "@/utils/stripe";
 import type { APIRoute } from "astro";
 
@@ -25,7 +25,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const lineItems = productsLine.map(product => createLineItem(product, product.cantidad));
 
     const session = await createSession(lineItems, {
-      userId,
+      userId: userId,
       products: JSON.stringify(productEntries.map(([id, quantity]) => ([+id, quantity])))
     });
 

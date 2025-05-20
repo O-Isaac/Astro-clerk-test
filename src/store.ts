@@ -78,10 +78,3 @@ export const decreaseQuantity = (itemId: number, quantity: number) => {
   shoppingCart.set(updatedCart);
 };
 
-shoppingCart.listen((cart) => {
-  const cleanedCart = cart.filter((item) => item.quantity > 0);
-
-  if (cleanedCart.length !== cart.length) {
-    shoppingCart.set(cleanedCart);
-  }
-});

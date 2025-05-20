@@ -1,0 +1,16 @@
+---
+import { navigation } from "@/consts";
+import { UserButton } from "@clerk/astro/components";
+---
+
+<UserButton.MenuItems>
+    {navigation.map((item) => (
+      <UserButton.Link label={item.name} href={item.href}>
+        <div class="" slot="label-icon">
+          {item.icon}
+        </div>
+      </UserButton.Link>
+    ))}
+
+</UserButton.MenuItems>
+

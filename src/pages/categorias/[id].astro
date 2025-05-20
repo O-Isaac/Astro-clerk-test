@@ -1,8 +1,8 @@
 ---
-import AddToCart from '@/components/react/addItem';
-import Logo from '@/icons/logo.astro';
-import Layout from '@/layouts/Layout.astro';
-import { getCategorias, getProductByCategory } from '@/utils/database';
+import AddToCart from "@/components/react/cart/addItem";
+import Logo from "@/icons/logo.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getCategorias, getProductByCategory } from "@/utils/database";
 
 const categorias = await getCategorias();
 
@@ -11,7 +11,7 @@ const { id } = Astro.params;
 const isCategoryValid = categorias.some((cat) => cat.id === id);
 
 if (!isCategoryValid || !id) {
-  return Astro.redirect("/categorias", 302)
+  return Astro.redirect("/categorias", 302);
 }
 
 const categoriaSeleccionada = categorias.find((cat) => cat.id === id)!;
@@ -19,25 +19,29 @@ const productos = await getProductByCategory(id as string);
 ---
 
 <Layout title="Categorías - Store">
-    <span class="size-32 bg-blue-500/10 absolute rounded-full blur-2xl"></span>
-    <span class="size-32 bg-amber-500/10 absolute rounded-full blur-2xl right-0 top-48"></span>
-  
-    <header class="mx-auto container p-4">
-      <Logo class="my-24 block mx-auto invert max-w-fit svg-elem-1 svg-active w-full" />
-      <p class="text-5xl text-pretty leading-tight -mt-15 mb-20 text-center font-light">
-        {categoriaSeleccionada.nombre}
-      </p>
-      <p class="text-xl text-center font-light text-gray-300 mb-20 max-w-2xl mx-auto -mt-15">
-        {categoriaSeleccionada.descripcion}
-      </p>
-    </header>
-  
-    <main class="container mx-auto px-6 grid gap-16 lg:grid-cols-4 pb-16">
-      {
-        productos.map((producto) => (
+  <span class="size-32 bg-blue-500/10 absolute rounded-full blur-2xl"></span>
+  <span class="size-32 bg-amber-500/10 absolute rounded-full blur-2xl right-0 top-48"></span>
+
+  <header class="mx-auto container p-4">
+    <Logo class="my-24 block mx-auto invert max-w-fit svg-elem-1 svg-active w-full" />
+    <p class="text-5xl text-pretty leading-tight -mt-15 mb-20 text-center font-light">
+      {categoriaSeleccionada.nombre}
+    </p>
+    <p class="text-xl text-center font-light text-gray-300 mb-20 max-w-2xl mx-auto -mt-15">
+      {categoriaSeleccionada.descripcion}
+    </p>
+  </header>
+
+  <main class="container mx-auto px-6 grid gap-16 lg:grid-cols-4 pb-16">
+    {
+      productos.map((producto) => (
         <article class="relative shadow shadow-neutral-100/5 group rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] flex flex-col">
           <div class="relative">
-            <img class="w-full absolute inset-0 h-98 object-cover opacity-60 transition duration-300 blur-2xl" src={producto.imagen} alt={producto.nombre} />
+            <img
+              class="w-full absolute inset-0 h-98 object-cover opacity-60 transition duration-300 blur-2xl"
+              src={producto.imagen}
+              alt={producto.nombre}
+            />
             <img class="w-full object-contain opacity-60 h-96 transition duration-300" src={producto.imagen} alt={producto.nombre} />
           </div>
 
@@ -48,19 +52,18 @@ const productos = await getProductByCategory(id as string);
           </div>
 
           <div class="w-full mt-auto">
-            <AddToCart 
+            <AddToCart
               client:only="react"
-              id={producto.id} 
-              imageSrc={producto.imagen} 
-              name={producto.nombre} 
-              price={producto.precio} 
+              id={producto.id}
+              imageSrc={producto.imagen}
+              name={producto.nombre}
+              price={producto.precio}
               quantity={1}
               className="w-full bg-blue-500/10 hover:bg-blue-500/20 hover:scale-[1.02] transition-all duration-300 p-4 rounded cursor-pointer text-white font-bold"
             />
           </div>
         </article>
-
-        ))
-      }
-    </main>
-  </Layout>
+      ))
+    }
+  </main>
+</Layout>

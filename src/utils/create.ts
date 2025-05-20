@@ -41,7 +41,7 @@ interface Order {
     total: number,
 }
 
-export const createOrderIfNotExists = async (id: string, status: string, order: Order, onCreated: (id: string) => void) => {
+export const createOrderIfNotExists = async (id: string, status: string, order: Order, onCreate?: () => void) => {
     const pedido = await db.select()
         .from(Pedidos)
         .where(eq(Pedidos.id, id))
@@ -64,7 +64,7 @@ export const createOrderIfNotExists = async (id: string, status: string, order: 
             total,
         })
         
-        onCreated(id);
+        onCreate?.()
         
         return true;
     } catch (error) {

@@ -1,0 +1,20 @@
+---
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/astro/components";
+import Cart from "@/components/react/cart/cart";
+import Menu from "@/components/auth/menu.astro";
+---
+
+<SignedOut>
+  <SignInButton class="px-4 shrink-0 py-2 rounded shadow hover:bg-white/5 active:bg-white/10 transition-colors cursor-pointer" mode="modal">
+    Iniciar Sesión
+  </SignInButton>
+</SignedOut>
+<SignedIn>
+  <div class="flex items-center gap-2">
+    <UserButton showName appearance={{ elements: { userButtonBox: " px-3 py-2 text-white " } }} class:list={"px-4 py-2 rounded shadow"}>
+      <Menu />
+    </UserButton>
+
+    <Cart client:only="react" />
+  </div>
+</SignedIn>

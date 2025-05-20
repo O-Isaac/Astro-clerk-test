@@ -1,4 +1,4 @@
-import { db, Categorias, Productos, eq, inArray, Usuarios } from "astro:db";
+import { db, Categorias, Productos, eq, inArray, Usuarios, Pedidos } from "astro:db";
 
 export const getCategorias = async () => {
   return await db
@@ -69,3 +69,10 @@ export const getProductosConCantidad = async (items: [number, number][]) => {
 
   return resultado;
 };
+
+export const getOrdersByUserId = (userId: string) => {
+  return db.select()
+    .from(Pedidos)
+    .where(eq(Pedidos.userId, userId))
+    .all();
+}

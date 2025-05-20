@@ -1,0 +1,28 @@
+---
+import { ProductsPage } from "@/components/react/products/ProductsPage";
+import Layout from "@/layouts/Layout.astro";
+import { Categorias } from "astro:db";
+import { Productos } from "astro:db";
+import { db, eq } from "astro:db";
+import { type Product } from "@/hooks/useProductFilters";
+
+const productsDatabase = await db
+    .select()
+    .from(Productos)
+    .innerJoin(Categorias, eq(Productos.categoria, Categorias.id))
+    .all();
+
+
+const products: Product[] = productsDatabase.map(({ Categorias, Productos }) => ({
+    id: Productos.id,
+    name: Productos.nombre,
+    price: Productos.precio,
+    category: Categorias.nombre,
+    imageUrl: Productos.imagen
+}))
+
+---
+
+<Layout title="Productos - Store">
+    <ProductsPage client:only="react" products={products} />
+</Layout>

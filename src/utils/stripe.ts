@@ -28,7 +28,8 @@ export const createSession = (line_items: LineItems, metadata: Stripe.MetadataPa
   metadata,
   invoice_creation: {
     enabled: true,
-    invoice_data: {} 
+    invoice_data: {
+    },
   },
   locale: "es"
 })
