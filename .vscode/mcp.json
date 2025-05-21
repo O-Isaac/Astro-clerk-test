@@ -1,0 +1,11 @@
+{
+    "servers": {
+        "suprabox": {
+            "command": "npx",
+            "args": [
+                "mcp-remote",
+                "https://fioricet-defines-tells-bluetooth.trycloudflare.com/mcp"
+            ]
+        }
+    }
+}

@@ -76,3 +76,11 @@ export const getOrdersByUserId = (userId: string) => {
     .where(eq(Pedidos.userId, userId))
     .all();
 }
+
+export const getProductsWithCategory = () => {
+  return db.select()
+    .from(Productos)
+    .innerJoin(Categorias, eq(Productos.categoria, Categorias.id))
+    .groupBy(Productos.id)
+    .all();
+}

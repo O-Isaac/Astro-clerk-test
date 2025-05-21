@@ -1,0 +1,39 @@
+{
+	"name": "remote-mcp-server-authless",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"tunnel": "cloudflared tunnel --url http://localhost:8787",
+		"dev": "wrangler dev",
+		"dev:all": "turbo run start",
+		"format": "biome format --write",
+		"lint:fix": "biome lint --fix",
+		"start": "wrangler dev",
+		"cf-typegen": "wrangler types",
+		"type-check": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/node": "^22.15.20",
+		"cloudflared": "^0.7.0",
+		"turbo": "^2.5.3",
+		"typescript": "^5.8.3",
+		"wrangler": "^4.16.0"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.11.4",
+		"agents": "^0.0.88",
+		"zod": "^3.25.7"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"@biomejs/biome",
+			"cloudflared",
+			"esbuild",
+			"sharp",
+			"workerd"
+		]
+	},
+	"packageManager": "pnpm@10.4.0"
+}

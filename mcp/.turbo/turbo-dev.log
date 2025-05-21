@@ -1,0 +1,137 @@
+
+> remote-mcp-server-authless@0.0.0 dev C:\Users\Isaac\Dev\firebase-store\mcp
+> wrangler dev
+
+
+ ⛅️ wrangler 4.16.0
+-------------------
+
+Your Worker and resources are simulated locally via Miniflare. For more information, see: https://developers.cloudflare.com/workers/testing/local-development.
+
+Your Worker has access to the following bindings:
+- Durable Objects:
+  - MCP_OBJECT: MyMCP
+[wrangler:inf] Ready on http://127.0.0.1:8787
+⎔ Starting local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+[wrangler:inf] OPTIONS / 404 Not Found (3ms)
+[wrangler:inf] GET / 404 Not Found (2ms)
+[wrangler:inf] GET / 404 Not Found (2ms)
+[wrangler:inf] OPTIONS / 404 Not Found (2ms)
+[wrangler:inf] GET / 404 Not Found (2ms)
+[wrangler:inf] GET / 404 Not Found (1ms)
+[wrangler:inf] OPTIONS /m 404 Not Found (1ms)
+[wrangler:inf] GET /m 404 Not Found (3ms)
+[wrangler:inf] GET /m 404 Not Found (1ms)
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+[wrangler:inf] OPTIONS /mcp 200 OK (2ms)
+[wrangler:inf] POST /mcp 200 OK (22ms)
+Connection 1vQQZkZUR1kTpN9O-upPO connected to _a:581ba16d25b1b7173f8d04a7483e2e946f2e91ea5dafd8629d845121f31c7720
+[wrangler:inf] POST /mcp 202 Accepted (4ms)
+Connection xVtPtx9EQRGBlcgvIN0Ru connected to _a:581ba16d25b1b7173f8d04a7483e2e946f2e91ea5dafd8629d845121f31c7720
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+[wrangler:inf] POST /mcp 200 OK (3ms)
+Connection gVIvuuZFq0rRkcOVxaP4S connected to _a:581ba16d25b1b7173f8d04a7483e2e946f2e91ea5dafd8629d845121f31c7720
+[wrangler:inf] POST /mcp 200 OK (16ms)
+Connection DJnIEJiyGb33wJYxmZoSO connected to _a:209b935149ba25546015edd5a0fd32cfa9a82e574e070f767c4e59dc6c43936d
+[wrangler:inf] POST /mcp 202 Accepted (3ms)
+Connection jRDw1Ehw8l4i1UizavwBw connected to _a:209b935149ba25546015edd5a0fd32cfa9a82e574e070f767c4e59dc6c43936d
+[wrangler:inf] POST /mcp 200 OK (3ms)
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+Connection lf5m5QUHDKEPWf2w-cXV1 connected to _a:209b935149ba25546015edd5a0fd32cfa9a82e574e070f767c4e59dc6c43936d
+⎔ Reloading local server...
+⎔ Reloading local server...
+[wrangler:inf] POST /mcp 200 OK (60ms)
+Connection 3HcPcx2Ou6ABi4-8fsMGb connected to _a:aea649496c0cae0d6de7267e15f22dd318b79e66192ad6d05648c10d30bcb0e1
+[wrangler:inf] POST /mcp 202 Accepted (4ms)
+Connection RqHJTlr_rLC8kq_cwJZCb connected to _a:aea649496c0cae0d6de7267e15f22dd318b79e66192ad6d05648c10d30bcb0e1
+[wrangler:inf] POST /mcp 200 OK (5ms)
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+Connection KFOgw7q_R2mFAt3duzX1i connected to _a:aea649496c0cae0d6de7267e15f22dd318b79e66192ad6d05648c10d30bcb0e1
+[wrangler:inf] POST /mcp 200 OK (3ms)
+Connection rJhxEmtyrETUOn6A3Ug6b connected to _a:aea649496c0cae0d6de7267e15f22dd318b79e66192ad6d05648c10d30bcb0e1
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+[wrangler:inf] POST /mcp 200 OK (54ms)
+Connection yC0VkGMvNhiXkBp9OYExk connected to _a:c298a536f84d638c79c0bd02fad0920385ed5fe052aabaef7653a0abf66e3330
+[wrangler:inf] POST /mcp 202 Accepted (5ms)
+Connection 0dydRJae2_f1rNf6A-QZf connected to _a:c298a536f84d638c79c0bd02fad0920385ed5fe052aabaef7653a0abf66e3330
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+[wrangler:inf] POST /mcp 200 OK (3ms)
+Connection fAIFMi1gNNr0BcKy-8T0t connected to _a:c298a536f84d638c79c0bd02fad0920385ed5fe052aabaef7653a0abf66e3330
+[wrangler:inf] POST /mcp 200 OK (3ms)
+Connection 8WynQl75nIzYaS35-gyaj connected to _a:c298a536f84d638c79c0bd02fad0920385ed5fe052aabaef7653a0abf66e3330
+[wrangler:inf] POST /mcp 200 OK (14ms)
+Connection lvMNGUmJawroEmuOw8f3p connected to _a:613a355c4936c636528ba606dc1a52408a34fdce375ee996b371deb39ccddecf
+[wrangler:inf] POST /mcp 202 Accepted (3ms)
+Connection WMFi0BmS9Z3FoHa0ZXKh2 connected to _a:613a355c4936c636528ba606dc1a52408a34fdce375ee996b371deb39ccddecf
+[wrangler:inf] POST /mcp 200 OK (3ms)
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+Connection fWuom1bA3RxhG6RAJwmv9 connected to _a:613a355c4936c636528ba606dc1a52408a34fdce375ee996b371deb39ccddecf
+[wrangler:inf] POST /mcp 200 OK (7ms)
+Connection B7gkdKb4w7spcWU7ZaZHv connected to _a:613a355c4936c636528ba606dc1a52408a34fdce375ee996b371deb39ccddecf
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+[wrangler:inf] POST /mcp 200 OK (57ms)
+Connection I93wXlcaiSEvqHn6uMU-V connected to _a:27ed0b982fa663ed2251a6a401ee8b92ee3fbd0a7f9d0835b250aa0f0dc4d4a4
+[wrangler:inf] POST /mcp 202 Accepted (7ms)
+Connection vqk4WNBo6XX8P3H4NrP22 connected to _a:27ed0b982fa663ed2251a6a401ee8b92ee3fbd0a7f9d0835b250aa0f0dc4d4a4
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+[wrangler:inf] POST /mcp 200 OK (2ms)
+Connection sWaLdKK-K21RVTGmKKiAI connected to _a:27ed0b982fa663ed2251a6a401ee8b92ee3fbd0a7f9d0835b250aa0f0dc4d4a4
+[wrangler:inf] POST /mcp 200 OK (8ms)
+Connection o1UMBiwIwdfOco83bqn3p connected to _a:27ed0b982fa663ed2251a6a401ee8b92ee3fbd0a7f9d0835b250aa0f0dc4d4a4
+[wrangler:inf] POST /mcp 200 OK (16ms)
+Connection DWvAdptiQpbSM25RZEoRf connected to _a:edb116a4366e7f586d820f2e9b0c29757510e70754e17a5fd90ab643af99fa92
+[wrangler:inf] POST /mcp 202 Accepted (3ms)
+Connection cEGHfP46Jul0f42C_lZaT connected to _a:edb116a4366e7f586d820f2e9b0c29757510e70754e17a5fd90ab643af99fa92
+[wrangler:inf] POST /mcp 200 OK (2ms)
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+Connection OTxvRRlJPno-e1vOzXqHP connected to _a:edb116a4366e7f586d820f2e9b0c29757510e70754e17a5fd90ab643af99fa92
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+[wrangler:inf] POST /mcp 200 OK (57ms)
+Connection lG85vB9CFgwoYlCsjAefG connected to _a:c90216b1899fb0ce3076a00cc4610a6e808aa7d6858d3b08cc31fc6643635f5f
+[wrangler:inf] POST /mcp 202 Accepted (4ms)
+Connection GQgqd24-lvuxHdRvndtEe connected to _a:c90216b1899fb0ce3076a00cc4610a6e808aa7d6858d3b08cc31fc6643635f5f
+[wrangler:inf] POST /mcp 200 OK (3ms)
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+Connection PQfH3SR_ubdviHhLbfiLQ connected to _a:c90216b1899fb0ce3076a00cc4610a6e808aa7d6858d3b08cc31fc6643635f5f
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+⎔ Reloading local server...
+[wrangler:inf] POST /mcp 200 OK (55ms)
+Connection CqXufcLRNmuuRENZyvVdn connected to _a:0813c431901bf59a4ed713ae2863c8df6ec6af6245fc1fa6cfbcdf115141c589
+[wrangler:inf] POST /mcp 202 Accepted (6ms)
+Connection 6Au0Yd23kZS82yXQz_V5u connected to _a:0813c431901bf59a4ed713ae2863c8df6ec6af6245fc1fa6cfbcdf115141c589
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+[wrangler:inf] POST /mcp 200 OK (3ms)
+Connection oKoAErGrXu_bPAVKDGa5a connected to _a:0813c431901bf59a4ed713ae2863c8df6ec6af6245fc1fa6cfbcdf115141c589
+[wrangler:inf] POST /mcp 200 OK (7ms)
+Connection RtwQM8UoS27vIDguG7YH9 connected to _a:0813c431901bf59a4ed713ae2863c8df6ec6af6245fc1fa6cfbcdf115141c589
+[wrangler:inf] POST /mcp 200 OK (15ms)
+Connection v9YHNZyNannDGQs-4Z2Nw connected to _a:5ff4f706bf639cf1b519a3fa885ccd7b97d6d2cca7d48c6071eb2aa24fe82803
+[wrangler:inf] POST /mcp 202 Accepted (4ms)
+Connection GkozMB9MHufBofZFN0Kgq connected to _a:5ff4f706bf639cf1b519a3fa885ccd7b97d6d2cca7d48c6071eb2aa24fe82803
+[wrangler:inf] POST /mcp 200 OK (3ms)
+[wrangler:inf] GET /mcp 405 Method Not Allowed (2ms)
+Connection RvGL-tR5ltjdTJEXJjXGQ connected to _a:5ff4f706bf639cf1b519a3fa885ccd7b97d6d2cca7d48c6071eb2aa24fe82803
+⎔ Reloading local server...
+[wrangler:inf] GET /sse 200 OK (53ms)
+Connection kro_HiiaO-HdYn0s5O-6C connected to _a:012f3f8df36b8faf2027fc095156975beb76b1475f082860d90b0a19348ce232
+[wrangler:inf] POST /sse 404 Not Found (2ms)
+Connection hFZprL_19jzbFZ_WAuLDL connected to _a:04ae3f0a3b34b0650e6facb5283b938c83a2a92a423d9759f9f9a2827d3c70c3
+[wrangler:inf] GET /sse 200 OK (476ms)
+[wrangler:inf] POST /sse 404 Not Found (2ms)
+[wrangler:inf] GET /sse 200 OK (15ms)
+Connection M73NUujQHxKvyGmRSxp1r connected to _a:4bd887233d4275dee1c812859b22646746cc5bc2cab79e2470614cf3226c661a
+[wrangler:inf] POST /mcp 200 OK (15ms)

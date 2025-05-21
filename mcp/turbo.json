@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "dev": {},
+    "tunnel": {},
+    "start": {
+      "dependsOn": ["dev", "tunnel"]
+    }
+  }
+}
