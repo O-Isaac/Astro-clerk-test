@@ -6,7 +6,7 @@
     "dev": "astro dev --host --remote",
     "tunnel": "cloudflared tunnel --url http://localhost:4321",
     "dev:all": "turbo run start",
-    "build": "astro build",
+    "build": "astro build --remote",
     "preview": "astro preview",
     "astro": "astro"
   },
