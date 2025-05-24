@@ -10,9 +10,12 @@ import db from "@astrojs/db";
 
 import react from "@astrojs/react";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [clerk({ localization: esES }), db(), react()],
+  site: "https://suprabox.vercel.app",
+  integrations: [clerk({ localization: esES }), db(), react(), sitemap()],
   adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],
