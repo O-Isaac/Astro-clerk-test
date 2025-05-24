@@ -23,8 +23,8 @@ export const createSession = (line_items: LineItems, metadata: Stripe.MetadataPa
   },
   line_items,
   mode: "payment",
-  success_url: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/checkout/{CHECKOUT_SESSION_ID}` : `http://localhost:4321/checkout/{CHECKOUT_SESSION_ID}`,
-  cancel_url: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/checkout` : `http://localhost:4321/checkout`,
+  success_url: process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/checkout/{CHECKOUT_SESSION_ID}` : `http://localhost:4321/checkout/{CHECKOUT_SESSION_ID}`,
+  cancel_url: process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/checkout` : `http://localhost:4321/checkout`,
   metadata,
   invoice_creation: {
     enabled: true,
