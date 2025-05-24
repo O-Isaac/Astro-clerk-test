@@ -78,3 +78,7 @@ export const decreaseQuantity = (itemId: number, quantity: number) => {
   shoppingCart.set(updatedCart);
 };
 
+// Haz un listen que cuando el item llego a 0 lo elimine
+shoppingCart.listen((cart) => {
+  cart.forEach((item) => item.quantity === 0 && deleteFromCart(item.id));
+});

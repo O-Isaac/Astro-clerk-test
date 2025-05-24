@@ -2,7 +2,7 @@
 
 import { Drawer } from "vaul";
 import CartIcon from "@/icons/react/cart";
-import { useEffect, useId } from "react";
+import { useId } from "react";
 import { useStore } from "@nanostores/react";
 import { decreaseQuantity, deleteFromCart, getSubtotal, getTotalItems, increaseQuantity, shoppingCart } from "@/store";
 
