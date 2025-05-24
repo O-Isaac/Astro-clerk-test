@@ -1,6 +1,8 @@
 ---
 import Navbar from "@/components/navbar.astro";
 import { Toaster } from "sonner";
+import { Head } from "astro-capo";
+
 interface Props {
   title: string;
 }
@@ -9,13 +11,38 @@ const { title } = Astro.props;
 ---
 
 <html lang="en">
-  <head>
+  <Head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-  </head>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content={title} />
+    <meta name="description" content="Con suprabox asegurate de tener los mejores suplementos y ropa deportiva para tu dia a dia." />
+    <meta property="image" content="/assets/shop.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://suprabox.vercel.app" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Con suprabox asegurate de tener los mejores suplementos y ropa deportiva para tu dia a dia." />
+    <meta property="og:image" content="/assets/shop.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://suprabox.vercel.app" />
+    <meta property="twitter:title" content={title} />
+    <meta
+      property="twitter:description"
+      content="Con suprabox asegurate de tener los mejores suplementos y ropa deportiva para tu dia a dia."
+    />
+    <meta property="twitter:image" content="/assets/shop.png" />
+
+    <!-- SiteMaps -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </Head>
   <body class="bg-black bg-gradient-to-t from-neutral-950 to-blue-800/30 min-h-dvh text-white">
     <Toaster client:only="react" />
     <Navbar />
