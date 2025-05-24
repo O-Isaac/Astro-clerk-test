@@ -25,6 +25,11 @@ import "@egjs/flicking-plugins/dist/flicking-plugins.css";
   import Flicking from "@egjs/flicking";
   import { Perspective } from "@egjs/flicking-plugins";
 
+  // Prevent image drag
+  document.querySelectorAll(".flicking-camera img").forEach(img => {
+    img.setAttribute("draggable", "false");
+  });
+
   const carouselReferences = document.querySelectorAll("#carousel[data-init='false']");
 
   for (const carousel of carouselReferences) {

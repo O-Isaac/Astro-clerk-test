@@ -18,7 +18,8 @@ export const getProductById = async (productId: string) => {
   return await db.select()
     .from(Productos)
     .where(eq(Productos.id, Number(productId)))
-    .all();
+    .innerJoin(Categorias, eq(Productos.categoria, Categorias.id))
+    .get();
 }
 
 export const getProducts = async () => {

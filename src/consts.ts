@@ -13,5 +13,10 @@ export const navigation = [
     name: "Mis pedidos",
     href: "/checkout/estado",
     icon: "📦"
+  },
+  {
+    name: "Productos",
+    href: "/products",
+    icon: "💪"
   }
 ];

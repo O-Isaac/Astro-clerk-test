@@ -8,8 +8,6 @@ import { getUsername, getProductosConCantidad } from "@/utils/database";
 import { getSessionData, formatShipping } from "@/utils/stripe";
 import { generateOrderId } from "@/utils/security";
 import { createOrderIfNotExists } from "@/utils/create";
-import { clearCart, shoppingCart } from "@/store";
-import { stripe } from "@/utils/stripe";
 
 const { id } = Astro.params;
 const { userId } = Astro.locals.auth();
@@ -38,11 +36,12 @@ await createOrderIfNotExists(orderId, session.payment_status, {
   direccion: formatShipping(session.collected_information?.shipping_details),
   checkoutId: session.id,
   products: productsMetadata,
+  paymentId: session.payment_intent!.toString(),
   total: products.reduce((total, producto) => total + producto.precio * producto.cantidad, 0),
 })
 ---
 
-<Layout title="Checkout - Store">
+<Layout title="Finalizar Compra - Suprabox">
     <section class="relative w-full min-h-dvh border-t border-teal-500/30">
         <!-- Fondo difuso detrás, encapsulado en un contenedor que solo afecta el fondo -->
         <span class="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
@@ -86,7 +85,6 @@ await createOrderIfNotExists(orderId, session.payment_status, {
 </Layout>
 
 <script>
-  import { shoppingCart } from "@/store";
-
-  console.log(shoppingCart)
+  import { clearCart} from "@/store";
+  clearCart()
 </script>

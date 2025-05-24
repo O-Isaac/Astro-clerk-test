@@ -35,7 +35,7 @@ const Pedidos = defineTable({
     userId: column.text({ references: () => Usuarios.columns.id }),
     direccion: column.json(),
     sessionId: column.text(),
-    productos: column.text(), // va ha ser una array<[id, cantidad]> 
+    paymentId: column.text(),
     estado: column.text(), // Pagado, Enviado, Entregado
     total: column.number(),
     createdAt: column.date({ default: new Date() }),
@@ -43,7 +43,16 @@ const Pedidos = defineTable({
   }
 })
 
+const Lineas = defineTable({
+  columns: {
+    pedidoId: column.text({ references: () => Pedidos.columns.id }),
+    productoId: column.number({ references: () => Productos.columns.id }),
+    cantidad: column.number(),
+    precio: column.number(),
+  }
+})
+
 // https://astro.build/db/config
 export default defineDb({
-  tables: { Usuarios, Productos, Categorias, Pedidos },
+  tables: { Usuarios, Productos, Lineas, Categorias, Pedidos },
 });

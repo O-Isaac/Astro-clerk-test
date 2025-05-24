@@ -39,6 +39,12 @@ export default async function seed() {
       descripcion: "Quemadores de grasa y productos para acelerar el metabolismo",
       imagen: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format&fit=crop",
     },
+    {
+      id: "cat_ropaaccesorios",
+      nombre: "Ropa y Accesorios",
+      descripcion: "Ropa y accesorios para el entrenamiento y la salud",
+      imagen: "https://images.unsplash.com/photo-1601679249486-3e2a903f23ee?q=80&w=600&auto=format&fit=crop",
+    },
   ];
 
   // SEED DE PRODUCTOS
@@ -194,14 +200,6 @@ export default async function seed() {
 
     // Pérdida de Peso
     {
-      id: 14,
-      nombre: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/DietSupport_120Caps_2-_aeqEUmm.jpg?v=1741937054&width=1018",
-      descripcion: "Potente fórmula quemagrasas con extractos naturales. Acelera el metabolismo y reduce el apetito.",
-      precio: 38.95,
-      imagen: "https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&w=600&auto=format&fit=crop",
-      categoria: "cat_perdidapeso",
-    },
-    {
       id: 15,
       nombre: "CLA 1000mg",
       descripcion: "Ácido linoleico conjugado para favorecer la reducción de grasa corporal. 90 perlas.",
@@ -219,7 +217,90 @@ export default async function seed() {
         "https://images.ctfassets.net/z5siblnwi90s/5IffQtyd3r9GC8jfeAMW9N/ffe7e27a7c80fae4950e977d51db56f5/01-Front_Shot.jpg?fm=webp&w=1200&q=35",
       categoria: "cat_perdidapeso",
     },
+
+    // Ropa accesorios
+    {
+      id: 20,
+      nombre: "Calcetines para Atleta",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/ESN_Socken_2024x2024_shop-Q_uFRWMK_1dc3e233-c9f9-4bf3-ad80-ae0407bdf1fd.jpg?v=1747221312&width=2024",
+      precio: 7.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Calcetines deportivos diseñados para ofrecer comodidad y transpirabilidad durante entrenamientos intensos."
+    },
+    {
+      id: 21,
+      nombre: "Toalla de gimnasia",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/ESN_handtuch_knick_v1_2024x2024_shop-BVGXNp8j_d08ed3f5-fcbd-4025-b85c-418e2892d2f2.jpg?v=1738741571&width=2024",
+      precio: 14.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Toalla absorbente ideal para sesiones de entrenamiento, fabricada con materiales suaves y de secado rápido."
+    },
+    {
+      id: 22,
+      nombre: "Shaker",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/StandardShaker_Black_2024x2024_shop-W1UrqMmK_99d1e518-de7d-42f8-b444-947d97d3c27b.jpg?v=1724997685&width=2024",
+      precio: 4.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Shaker práctico para mezclar tus batidos de proteínas y suplementos de forma eficiente y sin grumos."
+    },
+    {
+      id: 23,
+      nombre: "Shaker Get Your Proteins",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/Shaker_Black_GetYourProteins_Men_2024x2024_shop.jpg?v=1733848848&width=2024",
+      precio: 4.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Shaker con diseño motivador 'Get Your Proteins', perfecto para tus mezclas antes o después del entrenamiento."
+    },
+    {
+      id: 24,
+      nombre: "Performance Bottle",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/PerformanceBottle_750ml_2024x2024_shop_86e18828-b15e-4a41-b21c-26b8c42afc25.jpg?v=1710756304&width=2024",
+      precio: 22.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Botella de alto rendimiento de 750 ml, resistente y con diseño ergonómico para mantenerte hidratado en el gimnasio."
+    },
+    {
+      id: 25,
+      nombre: "Backpack Army Style",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/backpack2_2024x2024_shop-f844FbKB_df21c28f-78f1-4a26-8b8d-4fbf65a0b90d.jpg?v=1724253381&width=2024",
+      precio: 119.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Mochila de estilo militar con amplio espacio de almacenamiento y durabilidad extrema para llevar tu equipo deportivo."
+    },
+    {
+      id: 26,
+      nombre: "Smartshake Reforce Stainless Steel",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/Smartshake_Steel_2024x2024_shop_d33d1554-b7c3-444e-b6e5-a5c3025412b9.jpg?v=1710940566&width=2024",
+      precio: 19.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Shaker de acero inoxidable con aislamiento térmico, ideal para mantener la temperatura de tus bebidas durante horas."
+    },
+    {
+      id: 27,
+      nombre: "Smartshake",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/Smartshake_2024x2024_shop_ce0ccd92-5057-49d6-899c-edd055bb1eac.jpg?v=1710940571&width=2024",
+      precio: 12.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Shaker versátil con compartimentos para suplementos y polvos, diseñado para facilitar tu nutrición en movimiento."
+    },
+    {
+      id: 28,
+      nombre: "Botella deportiva",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/SportsBottle_2024x2024_shop_38b0e157-6f83-49a4-9048-11b4eb4f2b7b.jpg?v=1710940572&width=2024",
+      precio: 4.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Botella ligera y ergonómica, perfecta para llevar al gimnasio o a actividades al aire libre."
+    },
+    {
+      id: 29,
+      nombre: "Botella Premium de Acero",
+      imagen: "https://cdn.shopify.com/s/files/1/0845/1358/7515/files/ESN_Premium_Steel_Bottle_2024x2024_shop-zzo95SuI_c9745017-fdca-449d-bf63-9f7f2fc4e8b2.jpg?v=1747221066&width=2024",
+      precio: 19.90,
+      categoria: "cat_ropaaccesorios",
+      descripcion: "Botella de acero premium, elegante y duradera, ideal para mantener bebidas frías o calientes por más tiempo."
+    }
   ];
+   
 
   // Seed de direcciones para los usuarios
   await db.insert(Categorias).values(categorias).catch(console.error);

@@ -1,5 +1,5 @@
 import type { User } from "@clerk/astro/server";
-import { db, eq, Pedidos, Usuarios } from "astro:db";
+import { db, eq, inArray, Lineas, Pedidos, Productos, Usuarios } from "astro:db";
 
 type currentUserFn  = () => Promise<User | null>; 
 
@@ -38,10 +38,11 @@ interface Order {
     userId: string,
     products: Array<[number, number]>,
     direccion: string,
+    paymentId: string,
     total: number,
 }
 
-export const createOrderIfNotExists = async (id: string, status: string, order: Order, onCreate?: () => void) => {
+export const createOrderIfNotExists = async (id: string, status: string, order: Order) => {
     const pedido = await db.select()
         .from(Pedidos)
         .where(eq(Pedidos.id, id))
@@ -52,20 +53,44 @@ export const createOrderIfNotExists = async (id: string, status: string, order: 
     }
     
     try {
-        const { userId, direccion, checkoutId, products, total } = order
+        const { userId, direccion, checkoutId, products, total, paymentId } = order
 
-        await db.insert(Pedidos).values({
+        const datos = {
             id,
             userId,
             direccion,
             estado: status == "paid" ? "Pagado" : status,
             sessionId: checkoutId,
-            productos: JSON.stringify(products),
+            paymentId,
             total,
+        }
+
+        const pedido = await db.insert(Pedidos).values(datos).returning().get()
+        
+        if (!pedido) {
+            console.log("Error al crear el pedido")
+            // Manejar el error con sentry a futuro
+            return false;
+        }
+
+        const productsDatabase = await db.select()
+            .from(Productos)
+            .where(inArray(Productos.id, products.map(product => product[0])))
+            .all()
+
+        const lineas = productsDatabase.map((product, index) => {
+            const [_, quantity] = products[index]
+            
+            return {
+                pedidoId: pedido.id,
+                productoId: product.id,
+                cantidad: quantity,
+                precio: product.precio,
+            }
         })
         
-        onCreate?.()
-        
+        await db.insert(Lineas).values(lineas)
+
         return true;
     } catch (error) {
         console.log(error)

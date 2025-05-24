@@ -2,17 +2,14 @@
 import Layout from "@/layouts/Layout.astro";
 import Carousel from "@/components/carousel.astro";
 import Logo from "@/icons/logo.astro";
-import { db, Productos } from "astro:db";
-import { eq } from "astro:db";
-import { shoppingCart } from "@/store";
+import { getProductByCategory } from "@/utils/database";
 
-const preenterno = await db.select().from(Productos).where(eq(Productos.categoria, "cat_preentreno"));
-const suplementos = await db.select().from(Productos).where(eq(Productos.categoria, "cat_aminoacidos"));
-
-shoppingCart.set([])
+const preenterno = await getProductByCategory("cat_preentreno");
+const suplementos = await getProductByCategory("cat_aminoacidos");
+const ropa = await getProductByCategory("cat_ropaaccesorios");
 ---
 
-<Layout title="Home - Store">
+<Layout title="Suprabox - Tienda de Productos de Gimnasio y Fitness">
   <span class="size-32 bg-blue-500/10 absolute rounded-full blur-2xl"></span>
   <span class="size-32 bg-blue-500/10 absolute rounded-full blur-2xl right-0 top-48"></span>
 
@@ -23,26 +20,27 @@ shoppingCart.set([])
     </p>
   </header>
 
+
   <section class="relative w-full border-t border-blue-500/30 mt-10 overflow-hidden">
     <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-blue-950/20 blur-[200px]"></div>
 
     <div class="my-20">
-      <h2 class="text-6xl md:text-right font-bold p-12 leading-0">Suplementos</h2>
-      <p class="text-2xl md:text-right font-light px-12 pb-12 text-gray-200">Los ultimos suplementos alimenticios del suprabox!</p>
+      <h2 class="text-6xl md:text-right font-bold p-12 leading-0">Ropa y accesorios</h2>
+      <p class="text-2xl md:text-right font-light px-12 pb-12 text-gray-200">Los ultimos productos de ropa y accesorios del suprabox!</p>
 
-      <Carousel perspective index={preenterno.length - 3} align="center" id="suplementos">
+      <Carousel perspective index={ropa.length - 3} align="center" id="ropa">
         {
-          preenterno.map((producto) => (
-            <div class="panel h-[700px] mask-b-from-80% mask-b-to-90% ">
-              <article class="relative h-full  shadow shadow-neutral-100/5 group rounded-2xl overflow-hidden transition-all duration-" >
+          ropa.map((producto) => (
+            <a draggable="false" href={`/product/${producto.id}`} class="panel h-[700px] mask-b-from-80% mask-b-to-90% ">
+              <article class="relative h-full shadow shadow-neutral-100/5 group rounded-2xl overflow-hidden transition-all " >
                 <img class="w-full absolute inset-0 h-[80%]  object-cover opacity-60 transition duration-300 blur-[200px]" src={producto.imagen} alt={producto.nombre} />
                 <img class="w-full object-contain opacity-60 my-10 transition duration-300 -mt-0" src={producto.imagen} alt={producto.nombre} />
-                <div class="px-6 ">
+                <div class="px-6">
                   <h2 class="text-2xl font-bold mb-2">{producto.nombre}</h2>
                   <p class="text-gray-600 mb-2">{producto.descripcion}</p>
                 </div>
               </article>
-            </div>
+            </a>
           ))
         }
       </Carousel>
@@ -58,7 +56,7 @@ shoppingCart.set([])
       <Carousel index={2} align="center" id="ropa">
         {
           suplementos.map((producto) => (
-          <div class="panel h-[700px]">
+          <a href={`/product/${producto.id}`} draggable="false" class="panel h-[700px]">
               <article class="relative h-full  shadow shadow-neutral-100/5 group rounded-2xl overflow-hidden transition-all duration-" >
                 <img class="w-full absolute inset-0 h-[80%]  object-cover opacity-60 transition duration-300 blur-[200px]" src={producto.imagen} alt={producto.nombre} />
                 <img class="w-full object-contain opacity-60 my-10 transition duration-300 -mt-0" src={producto.imagen} alt={producto.nombre} />
@@ -67,7 +65,33 @@ shoppingCart.set([])
                   <p class="text-gray-600 mb-2">{producto.descripcion}</p>
                 </div>
               </article>
-            </div>
+            </a>
+          ))
+        }
+      </Carousel>
+    </div>
+  </section>
+
+  <section class="relative w-full border-t border-red-500/30 mt-10 overflow-hidden">
+    <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-red-950/20 blur-[200px]"></div>
+
+    <div class="my-20">
+      <h2 class="text-6xl md:text-right font-bold p-12 leading-0">Suplementos</h2>
+      <p class="text-2xl md:text-right font-light px-12 pb-12 text-gray-200">Los ultimos suplementos alimenticios del suprabox!</p>
+
+      <Carousel perspective index={preenterno.length - 3} align="center" id="suplementos">
+        {
+          preenterno.map((producto) => (
+            <a draggable="false" href={`/product/${producto.id}`} class="panel h-[700px] mask-b-from-80% mask-b-to-90% ">
+              <article class="relative h-full  shadow shadow-neutral-100/5 group rounded-2xl overflow-hidden transition-all duration-" >
+                <img class="w-full absolute inset-0 h-[80%]  object-cover opacity-60 transition duration-300 blur-[200px]" src={producto.imagen} alt={producto.nombre} />
+                <img class="w-full object-contain opacity-60 my-10 transition duration-300 -mt-0" src={producto.imagen} alt={producto.nombre} />
+                <div class="px-6 ">
+                  <h2 class="text-2xl font-bold mb-2">{producto.nombre}</h2>
+                  <p class="text-gray-600 mb-2">{producto.descripcion}</p>
+                </div>
+              </article>
+            </a>
           ))
         }
       </Carousel>
@@ -81,6 +105,6 @@ shoppingCart.set([])
     margin-inline: 0.645rem;
     border-radius: 1rem;
     overflow: hidden;
-    pointer-events: none;
+    user-select: none;
   }
 </style>

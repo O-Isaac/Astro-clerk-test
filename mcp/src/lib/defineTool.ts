@@ -6,6 +6,7 @@ import { type ToolAnnotations } from "@modelcontextprotocol/sdk/types.js";
 /**
  * tool<Args extends ZodRawShape>(name: string, paramsSchemaOrAnnotations: Args | ToolAnnotations, cb: ToolCallback<Args>): RegisteredTool;
  * withServer devuelve una función que recibe el server y registra la tool.
+ * tambien en andler deberia poder pasar el server como segundo argumento
  */
 export function withServer<Args extends ZodRawShape>(
   name: string,

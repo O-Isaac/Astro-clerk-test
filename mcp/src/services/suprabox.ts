@@ -1,4 +1,4 @@
-const endpoint = "https://disorder-defects-programmers-treatments.trycloudflare.com";
+const endpoint = "https://demonstrated-directed-stating-did.trycloudflare.com";
 
 const createRequest = (path: string, init?: RequestInit) => fetch(endpoint + path, init);
 
@@ -13,3 +13,4 @@ const createResponse = (request: Promise<Response>) =>
 
 export const getAllProducts = () => createResponse(createRequest("/api/products/get"));
 export const getAllCategories = () => createResponse(createRequest("/api/categories/get"));
+export const getAuthToken = () => createResponse(createRequest("/api/auth/token")); 

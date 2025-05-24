@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const { userId } = locals.auth();
     
-    const products = await request.json();
+    const products = await request.json() as Record<string, number>;
     const productEntries = Object
       .entries(products)
       .map(([id, quantity]) => ([+id, quantity])) as Array<[number, number]>;

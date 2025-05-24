@@ -18,7 +18,7 @@ const categoriaSeleccionada = categorias.find((cat) => cat.id === id)!;
 const productos = await getProductByCategory(id as string);
 ---
 
-<Layout title="Categorías - Store">
+<Layout title={`Categorías de Productos de ${categoriaSeleccionada.nombre} - Suprabox`}>
   <span class="size-32 bg-blue-500/10 absolute rounded-full blur-2xl"></span>
   <span class="size-32 bg-amber-500/10 absolute rounded-full blur-2xl right-0 top-48"></span>
 

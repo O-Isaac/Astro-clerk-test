@@ -15,7 +15,7 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<Layout title="Estado de tus pedidos - Store">
+<Layout title="Estado de tus pedidos - Suprabox">
   <section class="relative w-full min-h-dvh border-t border-teal-500/30">
     <!-- Fondo difuso -->
     <span class="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
@@ -52,15 +52,15 @@ const formatDate = (date: Date) => {
               </div>
               <div class="text-white">
                 <p class="text-sm text-gray-400">Total</p>
-                <p class="font-semibold">{order.total}</p>
+                <p class="font-semibold">{order.total.toFixed(2)}€</p>
               </div>
               <div class="text-white">
                 <span
                   class:list={{
                     'bg-teal-500/20 text-teal-300': order.estado === 'Pagado',
-                    'bg-green-500/20 text-green-300': order.estado === 'completado',
-                    'bg-red-500/20 text-red-300': order.estado === 'cancelado',
-                    'bg-blue-500/20 text-blue-300': order.estado === 'en proceso',
+                    'bg-green-500/20 text-green-300': order.estado === 'Completado',
+                    'bg-red-500/20 text-red-300': order.estado === 'Cancelado',
+                    'bg-blue-500/20 text-blue-300': order.estado === 'En proceso',
                   }}
                   class="inline-block rounded-full px-4 py-2 text-sm font-medium"
                 >

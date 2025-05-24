@@ -1,26 +1,24 @@
-import { getAllProducts } from "@/services/suprabox";
+import { getAllProducts, getAuthToken } from "@/services/suprabox";
 import { withServer } from "@/lib/defineTool";
 import { z } from "zod";
 
-
 const param = {
     category: z.string(),
-    authToken: z.string().optional(),
 }
 
+export default withServer("suprabox-crear-pedido", param, async ({ category }, extra) => {
+    const { url } = await getAuthToken() as { url: string };
 
-export default withServer("suprabox-crear-pedido", param, async ({ category, authToken }) => {
-    if (!authToken) {
+    if (url) {
         return {
             content: [
-                { type: "text", text: "No se proporciono un token de autenticacion" }, 
-                { type: "text", text: "Pedir un token de autenticacion" }
+                { type: "text", text: "Autentificacion requerida, que el usuario inice sesion en el siguiente enlace" },
+                { type: "text", text: url },
             ],
         }
     }
 
     const productos = await getAllProducts() as any[];
-
     const productosFiltrados = productos.filter((el: any) => el.Categorias.nombre.toLowerCase().includes(category.toLowerCase()));
 
     // Pedido de ejemplo

@@ -23,6 +23,8 @@ const products: Product[] = productsDatabase.map(({ Categorias, Productos }) => 
 
 ---
 
-<Layout title="Productos - Store">
-    <ProductsPage client:only="react" products={products} />
+<Layout title="Suprabox - Productos de Gimnasio y Equipamiento Fitness">
+    <section class="min-h-dvh">
+        <ProductsPage client:only="react" products={products} />
+    </section>
 </Layout>

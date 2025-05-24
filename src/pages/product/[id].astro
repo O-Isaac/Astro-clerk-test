@@ -1,0 +1,47 @@
+---
+import AddToCart from '@/components/react/cart/addItem';
+import Layout from '@/layouts/Layout.astro';
+import { getProductById } from '@/utils/database';
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.params;
+
+const producto = await getProductById(id as string);
+
+if (!producto) {
+  return Astro.redirect("/", 302);
+}
+
+const { nombre, descripcion, precio, imagen, categoria } = producto.Productos;
+const { nombre: categoriaNombre } = producto.Categorias;
+---
+
+<Layout title={`Suprabox - Producto ${nombre}`}>
+  <section class="container mx-auto min-h-dvh lg:p-12 p-6">
+
+    <article class="flex items-start lg:flex-row flex-col gap-12 p-12">
+        <header class="relative">
+            <img class="aspect-square h-full rounded-2xl" src={imagen} alt={nombre} />
+            <img class="absolute inset-0 h-full rounded-2xl blur-2xl -z-10" src={imagen} alt={nombre} />
+        </header>
+        <main>
+            <h2 class="lg:text-2xl text-xl font-light mb-2"> <a class="hover:underline" href="/products">Productos</a> / <a class="hover:underline" href={`/categorias/${categoria}`}>{categoriaNombre}</a> / {nombre}</h2>
+            <h1 class="lg:text-6xl text-4xl font-bold mb-12">{nombre}</h1>
+            <p class="lg:text-2xl text-xl font-light mb-12">{descripcion}</p>
+            <p class="lg:text-2xl text-xl font-bold">{precio.toFixed(2)}€</p>
+            <AddToCart
+              client:only="react"
+              id={Number(id)}
+              imageSrc={imagen}
+              name={nombre}
+              price={Number(precio)}
+              quantity={1}
+              className="w-full my-6 lg:w-auto bg-amber-600 hover:bg-amber-700 transition-all duration-300 p-4 rounded cursor-pointer text-white font-bold"
+            />
+        </main>
+    </article>
+  </section>
+</Layout>

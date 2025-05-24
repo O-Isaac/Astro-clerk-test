@@ -16,6 +16,16 @@ export class MyMCP extends McpAgent {
 		add(this.server);
 		getProductosTool(this.server);
 		crearPedido(this.server);
+
+	}
+
+	public static async passToken(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+		const { token } = await request.json() as { token: string }
+
+		// Trendemos que pasar el token a la sesion del usuario que lo ha pedido 
+
+
+		return new Response("OK")
 	}
 }
 
@@ -29,6 +39,10 @@ export default {
 
 		if (url.pathname === "/mcp") {
 			return MyMCP.serve("/mcp").fetch(request, env, ctx);
+		}
+
+		if (url.pathname === "/api/auth/retrieve-token") {
+			return MyMCP.passToken(request, env, ctx)
 		}
 
 		return new Response("Not found", { status: 404 });
