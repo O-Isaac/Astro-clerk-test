@@ -2,11 +2,13 @@
 import Layout from "@/layouts/Layout.astro";
 import Carousel from "@/components/carousel.astro";
 import Logo from "@/icons/logo.astro";
-import { getProductByCategory } from "@/utils/database";
+import { getProductByCategory, getProducts } from "@/utils/database";
+import Home from "@/components/react/home/home";
 
 const preenterno = await getProductByCategory("cat_preentreno");
 const suplementos = await getProductByCategory("cat_aminoacidos");
 const ropa = await getProductByCategory("cat_ropaaccesorios");
+const products = await getProducts();
 ---
 
 <Layout title="Suprabox - Tienda de Productos de Gimnasio y Fitness">
@@ -20,6 +22,7 @@ const ropa = await getProductByCategory("cat_ropaaccesorios");
     </p>
   </header>
 
+  <Home client:only="react" products={products} />
 
   <section class="relative w-full border-t border-blue-500/30 mt-10 overflow-hidden">
     <div class="absolute left-1/2 -translate-1/2 w-full aspect-square rounded-full bg-blue-950/20 blur-[200px]"></div>
